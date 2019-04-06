@@ -74,10 +74,12 @@ function installTerraform{
 }
 
 function installTerraparser{
+    Write-Host 'Downloading the ChefDK installer'
     DownloadFile "https://raw.githubusercontent.com/rajshekhar17/terra_erb_parser/master/main.rb" 'C:\opscode\chefdk\embedded\bin\Terraparser.rb'
 }
 
 if(!(Test-Path -type leaf -path 'C:\opscode\chefdk\chef')){
+    Write-Host 'Installing Chef-DK'
     install_chefDK
 }
 
@@ -89,5 +91,9 @@ if(Get-Command "terraform.exe" -ErrorAction SilentlyContinue){
     Write-Host "Terraform in already installed"
 }
 else{
+    Write-Host 'Downloading and installing Terraform'
     installTerraform
 }
+
+Write-Host 'Downloading Terraparser'
+installTerraparser
